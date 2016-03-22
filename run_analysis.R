@@ -65,8 +65,9 @@ conjunto$Activity<-sapply(conjunto$Activity,cambio)
 final<-tbl_df(conjunto)
 #next we group the table by activity and subject, summarizing the meanfor the 3 of the 86  variables (this can be 
 #done for any of the 86 variables selected)
-agrupados<-group_by(final,Subject,Activity)
-resultado<-summarise(agrupados,TBodyAccMean=mean(tBodyAcc.mean...X),tGravityAcc.mean...X=mean(tGravityAcc.mean...X),
-                     fBodyGyro.mean...X=mean(fBodyGyro.mean...X),fBodyAccJerk.mean...Z=mean(fBodyAccJerk.mean...Z))
+#agrupados<-group_by(final,Subject,Activity) Not usesd this next 4 lines
+#resultado<-summarise(agrupados,TBodyAccMean=mean(tBodyAcc.mean...X),tGravityAcc.mean...X=mean(tGravityAcc.mean...X),
+#                     fBodyGyro.mean...X=mean(fBodyGyro.mean...X),fBodyAccJerk.mean...Z=mean(fBodyAccJerk.mean...Z))
+#View(resultado)
+resultado<-ddply(conjunto, c("Subject","Activity"), numcolwise(mean))
 View(resultado)
-
